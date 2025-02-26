@@ -15,6 +15,7 @@ This repository is for the **SolVault Bounty project**. It includes an integrati
    cd solvault-bounty
    ```
 2. **Create and Activate a Virtual Environment**:
+
    macOS/Linux:
 
    ```sh
@@ -29,13 +30,13 @@ This repository is for the **SolVault Bounty project**. It includes an integrati
    .venv\Scripts\activate
    ```
 
-3. **Install Dependencies**:
+4. **Install Dependencies**:
 
    ```sh
    pip install -r requirements.txt
    ```
 
-4. **Run the Script**:
+5. **Run the Script**:
 
    ```sh
    python solvault.py
@@ -43,7 +44,7 @@ This repository is for the **SolVault Bounty project**. It includes an integrati
 
 ```
 
-## Contribution
+Contribution
 
 If you'd like to contribute, feel free to fork the repository and submit a pull request.
 
