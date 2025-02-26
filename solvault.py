@@ -2,8 +2,10 @@ import time
 from typing import Dict, List, Optional
 import random
 
-class JupiterAPI:
 
+class JupiterAPI:
+    
+    
     """Simulates Jupiter's API for price tracking and trade execution on Solana."""
     def __init__(self):
         self.current_price = 100.0  # Starting Jupiter-based asset price on Solana
@@ -21,9 +23,12 @@ class JupiterAPI:
             return True
         return False
 
-class SolVault:
 
-    """SolVault trading platform, leveraging Jupiter's API on Solana for advanced trading features."""
+class SolVault:
+    
+    
+    """SolVault trading platform, leveraging Jupiter's API on Solana for advanced trading
+    features."""
     def __init__(self):
         self.users: Dict[str, Dict] = {}
         self.jupiter = JupiterAPI()
@@ -74,7 +79,7 @@ class SolVault:
             print("Error: Insufficient balance.")
             return False
 
-        rr_ratio = self.calculate_risk_reward(current_price, stop_loss or current_price, 
+        rr_ratio = self.calculate_risk_reward(current_price, stop_loss or current_price,
                                             take_profit or current_price) if stop_loss and take_profit else None
 
         order = {
@@ -93,29 +98,38 @@ class SolVault:
         }
         self.orders.append(order)
         user["orders"].append(order)
-        print(f"Placed {trade_type} order on SolVault via Jupiter: Amount={amount}, Limit={limit_price}, "
-            f"SL={stop_loss}, TP={take_profit}, Trailing={trailing_stop} ({trailing_percent}%)")
+        print(
+            f"Placed {trade_type} order on SolVault via Jupiter: Amount={amount}, "
+            f"Limit={limit_price}, SL={stop_loss}, TP={take_profit}, "
+            f"Trailing={trailing_stop} ({trailing_percent}%)"
+        )
         return True
 
     def update_trailing_stop(self, order: Dict, current_price: float):
-        """Updates a trailing stop order on SolVault based on a percentage of the current price."""
+        """Updates a trailing stop order on SolVault based on a percentage of the current
+        price."""
         if not order["trailing_stop"] or not order["active"] or not order["entry_price"]:
             return
-        
+
         trail_distance = current_price * (order["trail_percent"] / 100)  # Convert % to price distance
         max_price = max(order["entry_price"], current_price)  # Track the highest price reached
-        
+
         # Adjust stop loss to trail the max price by the percentage distance
         new_stop_loss = max_price - trail_distance
         if new_stop_loss > order["stop_loss"]:  # Only move stop loss up (for long positions)
             order["stop_loss"] = new_stop_loss
-            print(f"Trailing stop updated to {order['stop_loss']:.2f} for {order['username']} "
-                f"(trail: {order['trail_percent']}%)")
+            print(
+                f"Trailing stop updated to {order['stop_loss']:.2f} for {order['username']} "
+                f"(trail: {order['trail_percent']}%)"
+            )
 
     def check_market_and_execute(self):
         """Checks market conditions and executes orders on SolVault via Jupiter on Solana."""
         current_price = self.jupiter.get_price()
-        print(f"Current price on SolVault via Jupiter: {current_price:.2f} | Liquidity: {self.jupiter.liquidity_pool:.2f}")
+        print(
+            f"Current price on SolVault via Jupiter: {current_price:.2f} | "
+            f"Liquidity: {self.jupiter.liquidity_pool:.2f}"
+        )
 
         for order in self.orders:
             if not order["active"]:
@@ -129,10 +143,14 @@ class SolVault:
 
             if target_hit and self.jupiter.execute_trade(order["amount"], current_price, order["type"]):
                 order["entry_price"] = current_price
-                user["positions"].append({"type": order["type"], "amount": order["amount"], 
-                                        "entry_price": current_price, "current_value": order["amount"] * current_price})
+                user["positions"].append({"type": order["type"], "amount": order["amount"],
+                                        "entry_price": current_price,
+                                        "current_value": order["amount"] * current_price})
                 user["balance"] -= order["amount"] * current_price
-                print(f"Executed {order['type']} limit order for {order['username']} on SolVault at {current_price}")
+                print(
+                    f"Executed {order['type']} limit order for {order['username']} on SolVault "
+                    f"at {current_price}"
+                )
                 if not (order["stop_loss"] or order["take_profit"]):
                     order["active"] = False
 
@@ -144,18 +162,28 @@ class SolVault:
                     action = "stop loss" if stop_hit else "take profit"
                     user["balance"] += order["amount"] * current_price
                     order["active"] = False
-                    print(f"OCO triggered {action} for {order['username']} on SolVault at {current_price}")
+                    print(
+                        f"OCO triggered {action} for {order['username']} on SolVault at "
+                        f"{current_price}"
+                    )
                 elif stop_hit:
                     user["balance"] += order["amount"] * current_price
                     order["active"] = False
-                    print(f"Stop loss triggered for {order['username']} on SolVault at {current_price}")
+                    print(
+                        f"Stop loss triggered for {order['username']} on SolVault at "
+                        f"{current_price}"
+                    )
                 elif profit_hit:
                     user["balance"] += order["amount"] * current_price
                     order["active"] = False
-                    print(f"Take profit triggered for {order['username']} on SolVault at {current_price}")
+                    print(
+                        f"Take profit triggered for {order['username']} on SolVault at "
+                        f"{current_price}"
+                    )
 
-            user["portfolio_history"].append({"time": time.time(), "balance": user["balance"], 
-                                            "positions_value": sum(p["current_value"] for p in user["positions"])})
+            user["portfolio_history"].append({"time": time.time(), "balance": user["balance"],
+                                            "positions_value": sum(p["current_value"] for p in
+                                                                user["positions"])})
 
     def dashboard(self, username: str):
         """Displays the SolVault dashboard for a user, showing balances and orders."""
@@ -170,9 +198,12 @@ class SolVault:
         print(f"Active Orders: {len(user['orders'])}")
         print(f"Portfolio Value: {total_value:.2f}")
         if user["portfolio_history"]:
-            print(f"Latest Portfolio Update: Balance={user['portfolio_history'][-1]['balance']:.2f}, "
-                f"Positions Value={user['portfolio_history'][-1]['positions_value']:.2f}")
+            print(
+                f"Latest Portfolio Update: Balance={user['portfolio_history'][-1]['balance']:.2f}, "
+                f"Positions Value={user['portfolio_history'][-1]['positions_value']:.2f}"
+            )
         print("====================\n")
+
 
 if __name__ == "__main__":
     sol_vault = SolVault()
@@ -180,10 +211,11 @@ if __name__ == "__main__":
     sol_vault.login("protrader", "pass456")
 
     # Place a Jupiter/Solana perp order with a 2% trailing stop
-    sol_vault.place_order("protrader", "perp", 10.0, 102.0, stop_loss=98.0, take_profit=110.0, 
+    sol_vault.place_order("protrader", "perp", 10.0, 102.0, stop_loss=98.0, take_profit=110.0,
                         trailing_stop=True, trailing_percent=2.0)
 
     for _ in range(15):
         sol_vault.check_market_and_execute()
         sol_vault.dashboard("protrader")
         time.sleep(1)
+        
