@@ -5,7 +5,7 @@ This repository is for the **SolVault Bounty project**. It includes an integrati
 ## Contact
 
 **Name:** Xerxes III\
-**Email:** [dee.makindee.dev@gmail.com](mailto\:dee.makindee.dev@gmail.com)
+**Email:** [dee.makindee.dev@gmail.com](mailto:dee.makindee.dev@gmail.com)
 
 ## Setup
 
@@ -15,21 +15,40 @@ This repository is for the **SolVault Bounty project**. It includes an integrati
    cd solvault-bounty
    ```
 2. **Create and Activate a Virtual Environment**:
-macOS/Linux:
-python3 -m venv .venv
-source .venv/bin/activate
+   macOS/Linux:
 
-Windows:
-python -m venv .venv
-.venv\Scripts\activate
+   ```sh
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+   Windows:
+
+   ```sh
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
 
 3. **Install Dependencies**:
-pip install -r requirements.txt
+
+   ```sh
+   pip install -r requirements.txt
+   ```
 
 4. **Run the Script**:
-python solvault.py
+
+   ```sh
+   python solvault.py
+   ```
+
+```
 
 ## Contribution
+
 If you'd like to contribute, feel free to fork the repository and submit a pull request.
 
+```
 
+```
+
+```
