@@ -75,7 +75,7 @@ Developed by an experienced developer focused on Solana blockchain projects. Cur
 ## Submission Links
 
 Slide Deck: [https://drive.google.com/file/d/1feMLn2-T9LpezMfJS8wPHX2bVIcRetzO/view?usp=drive_link]
-Supplementary Doc: [Google Drive link] (to be added on Day 2)
+Supplementary Doc: [https://drive.google.com/file/d/1ei9BssVsl8G5sDGOUxw581ooKmWQhlpy/view?usp=drivesdk] 
 
 ## Testing
 
