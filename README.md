@@ -13,7 +13,7 @@ This repository contains the **SolVault Bounty project**, an advanced trading pl
 ## Planned Enhancements
 
 - Real-time price feed integration with Solana oracles/Jupiter API (requires API key).
-- Multi-asset support for trading different tokens (e.g., SOL, JUP, USDC) on Solana.
+- Multi-asset support for trading different tokens (e.g. SOL, JUP, USDC) on Solana.
 - Backtesting feature for historical price data and strategy testing.
 - Command-line interface (CLI) or web-based dashboard for improved user experience.
 - Dynamic liquidity pool simulation based on market activity.
